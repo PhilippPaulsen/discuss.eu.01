@@ -42,18 +42,17 @@ messages = get_messages()
 
 # Display messages in speech bubbles with alignment
 for msg in messages:
-    if msg['user'] == "You":
-        st.markdown(f"""
-        <div style='text-align: right; background-color: #DCF8C6; padding: 10px; border-radius: 15px; margin: 5px 0;'>
-            <b>{msg['user']}:</b> {msg['message']}
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown(f"""
-        <div style='text-align: left; background-color: #E5E5EA; padding: 10px; border-radius: 15px; margin: 5px 0;'>
-            <b>{msg['user']}:</b> {msg['message']}
-        </div>
-        """, unsafe_allow_html=True)
+    user_name = msg['user']
+    message_content = msg['message']
+    
+    bubble_style = "background-color: #DCF8C6; color: black; text-align: right;" if user_name == "You" else "background-color: #E5E5EA; color: black; text-align: left;"
+    alignment = "right" if user_name == "You" else "left"
+    
+    st.markdown(f"""
+    <div style='text-align: {alignment}; padding: 10px; border-radius: 15px; margin: 5px 0; {bubble_style}'>
+        <b>{user_name}:</b> {message_content}
+    </div>
+    """, unsafe_allow_html=True)
 
 # Input for new message
 user_input = st.text_input("Your message:")
