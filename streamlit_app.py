@@ -61,9 +61,9 @@ for msg in messages:
     
     # Define color scheme
     if user_name == "You":
-        bubble_style = "background-color: black; color: white;"
+        bubble_style = "background-color: lightgray; color: black;"
     elif user_name.lower() == "ai":
-        bubble_style = "background-color: darkgray; color: white;"
+        bubble_style = "background-color: #4D4D4D; color: white;"
     else:
         bubble_style = "background-color: lightgray; color: black;"
     
