@@ -75,45 +75,46 @@ for msg in messages:
 
 # Input for new message
 user_input = st.text_input("Your message:")
-if st.button("📩"):
-    chat_ref.add({
-        "user": "You",
-        "message": user_input,
-        "timestamp": datetime.utcnow()
-    })
-    st.rerun()  # Refresh chat instantly
 
-# Buttons with mouse-over tooltips
-col1, col2 = st.columns([1, 1])
+# Arrange buttons
+col1, col2 = st.columns([3, 1])
 with col1:
-    if st.button("🆕", help="Start a new conversation"):
-        for doc in chat_ref.stream():
-            doc.reference.delete()
-        st.rerun()
-with col2:
-    if st.button("💾", help="Save and download conversation"):
-        conversation_text = "\n".join([f"{msg['user']}: {msg['message']}" for msg in messages])
-        st.download_button(label="⬇️", data=conversation_text, file_name="discurs_chat.txt", mime="text/plain")
-
-# AI Interventions with tooltips
-col1, col2, col3 = st.columns(3)
-with col1:
-    if st.button("🧐", help="Fact-check the last statement"):
-        fact_prompt = f"Fact-check this statement and provide reliable sources if possible: {user_input}"
-        fact_response = ask_openai(fact_prompt)
-        st.write(f"🧐 Fact-Check Result: {fact_response}")
+    fact_col, logic_col, arg_col = st.columns(3)
+    with fact_col:
+        if st.button("🧐", help="Fact-check the last statement"):
+            fact_prompt = f"Fact-check this statement and provide reliable sources if possible: {user_input}"
+            fact_response = ask_openai(fact_prompt)
+            st.write(f"🧐 Fact-Check Result: {fact_response}")
+    with logic_col:
+        if st.button("🧠", help="Analyze logic and detect fallacies"):
+            logic_prompt = f"Analyze the logical coherence of this statement and identify any fallacies: {user_input}"
+            logic_response = ask_openai(logic_prompt)
+            st.write(f"🧠 Logic Check Result: {logic_response}")
+    with arg_col:
+        if st.button("📖", help="Evaluate argument structure"):
+            argument_prompt = f"Evaluate the argument structure of this statement and suggest improvements: {user_input}"
+            argument_response = ask_openai(argument_prompt)
+            st.write(f"📖 Argument Analysis: {argument_response}")
 
 with col2:
-    if st.button("🧠", help="Analyze logic and detect fallacies"):
-        logic_prompt = f"Analyze the logical coherence of this statement and identify any fallacies: {user_input}"
-        logic_response = ask_openai(logic_prompt)
-        st.write(f"🧠 Logic Check Result: {logic_response}")
-
-with col3:
-    if st.button("📖", help="Evaluate argument structure"):
-        argument_prompt = f"Evaluate the argument structure of this statement and suggest improvements: {user_input}"
-        argument_response = ask_openai(argument_prompt)
-        st.write(f"📖 Argument Analysis: {argument_response}")
+    post_col, save_col, new_col = st.columns(3)
+    with post_col:
+        if st.button("📩"):
+            chat_ref.add({
+                "user": "You",
+                "message": user_input,
+                "timestamp": datetime.utcnow()
+            })
+            st.rerun()
+    with save_col:
+        if st.button("💾", help="Save and download conversation"):
+            conversation_text = "\n".join([f"{msg['user']}: {msg['message']}" for msg in messages])
+            st.download_button(label="⬇️", data=conversation_text, file_name="discurs_chat.txt", mime="text/plain")
+    with new_col:
+        if st.button("🆕", help="Start a new conversation"):
+            for doc in chat_ref.stream():
+                doc.reference.delete()
+            st.rerun()
 
 # AI Flagging System (Passive Mode)
 if os.getenv("ENABLE_FLAGGING") == "true":  # Example flag control
