@@ -83,6 +83,17 @@ if st.button("Send") and user_input:
     })
     st.rerun()  # Refresh chat instantly
 
+# New Conversation Button
+if st.button("🆕 Start New Conversation"):
+    for doc in chat_ref.stream():
+        doc.reference.delete()
+    st.rerun()
+
+# Save Conversation Button
+if st.button("💾 Save Conversation"):
+    conversation_text = "\n".join([f"{msg['user']}: {msg['message']}" for msg in messages])
+    st.download_button(label="Download Chat History", data=conversation_text, file_name="discurs_chat.txt", mime="text/plain")
+
 # AI Interventions
 col1, col2, col3 = st.columns(3)
 with col1:
@@ -105,9 +116,9 @@ with col3:
 
 # AI Flagging System (Passive Mode)
 if os.getenv("ENABLE_FLAGGING") == "true":  # Example flag control
-    flagged_prompt = f"Analyze this statement for misleading, false, or illogical content: {user_input}. If issues exist, explain why."
+    flagged_prompt = f"Analyze this statement for misleading, false, or illogical content. If issues exist, flag them explicitly: {user_input}."
     flagged_response = ask_openai(flagged_prompt)
-    if "misleading" in flagged_response.lower() or "false" in flagged_response.lower() or "illogical" in flagged_response.lower():
+    if any(keyword in flagged_response.lower() for keyword in ["misleading", "false", "incorrect", "illogical", "inaccurate", "not true"]):
         st.warning("⚠️ AI has flagged this statement as potentially problematic.")
         if st.button("Explain Flag"):
             st.write(f"AI Explanation: {flagged_response}")
