@@ -1,80 +1,54 @@
 import streamlit as st
-import openai
+import firebase_admin
+from firebase_admin import credentials, firestore
 from datetime import datetime
-import random
 import os
 
-# OpenAI API Key (Replace with your key or load it securely)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Initialize Firebase securely
+if not firebase_admin._apps:
+    cred = credentials.Certificate(st.secrets["FIREBASE_CREDENTIALS"])
+    firebase_admin.initialize_app(cred)
 
-# Initialize session state for chat history if not present
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-if "selected_mode" not in st.session_state:
-    st.session_state.selected_mode = "Agora"
+db = firestore.client()
+chat_ref = db.collection("messages")
 
-# Sidebar for settings
-st.sidebar.title("Settings")
-st.sidebar.write("Select discussion mode:")
-mode = st.sidebar.selectbox("Mode", ["Agora", "Forum", "Lab"])
-st.session_state.selected_mode = mode
+# Fetch messages in real-time
+def get_messages():
+    docs = chat_ref.order_by("timestamp").stream()
+    return [{"user": doc.to_dict()["user"], "message": doc.to_dict()["message"]} for doc in docs]
 
-# Chat UI
-st.title("💬 Discurs.eu")
-st.write(f"🛠️ Mode: **{mode}** (Click dropdown in sidebar to switch)")
+st.title("💬 Discurs.eu - Agora Mode (Real-Time Chat)")
+st.write("Engage in live, AI-assisted discussions with real-time message updates.")
 
-# Display chat history
-for msg in st.session_state.messages:
-    if msg["role"] == "user":
-        st.chat_message("user").write(f"{msg['name']}: {msg['content']}")
-    else:
-        st.chat_message("assistant").write(msg['content'])
+# Display messages
+messages = get_messages()
+for msg in messages:
+    st.write(f"{msg['user']}: {msg['message']}")
 
-# User input
-user_input = st.text_input("Your message:", key="user_input")
+# Input for new message
+user_input = st.text_input("Your message:")
 if st.button("Send") and user_input:
-    user_name = "You"
-    st.session_state.messages.append({"role": "user", "name": user_name, "content": user_input})
-    st.chat_message("user").write(f"{user_name}: {user_input}")
-    
-    # AI intervention buttons
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if st.button("🧐 Fact-Check"):
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": f"Fact-check this statement: {user_input}"}]
-            )
-            fact_check_result = response["choices"][0]["message"]["content"]
-            st.session_state.messages.append({"role": "assistant", "content": fact_check_result})
-            st.chat_message("assistant").write(fact_check_result)
-    with col2:
-        if st.button("🧠 Logic Check"):
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": f"Analyze the logical coherence of this statement: {user_input}"}]
-            )
-            logic_result = response["choices"][0]["message"]["content"]
-            st.session_state.messages.append({"role": "assistant", "content": logic_result})
-            st.chat_message("assistant").write(logic_result)
-    with col3:
-        if st.button("📖 Argument Structure"):
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": f"Evaluate the argument structure of this statement: {user_input}"}]
-            )
-            argument_result = response["choices"][0]["message"]["content"]
-            st.session_state.messages.append({"role": "assistant", "content": argument_result})
-            st.chat_message("assistant").write(argument_result)
+    chat_ref.add({
+        "user": "You",
+        "message": user_input,
+        "timestamp": datetime.utcnow()
+    })
+    st.experimental_rerun()  # Refresh chat instantly
 
-# AI Flagging System
-if random.random() < 0.2:  # 20% chance to flag a message
-    st.warning("⚠️ AI has flagged this statement as potentially problematic. Click below to request an explanation.")
+# AI Interventions
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("🧐 Fact-Check"):
+        st.write("AI Fact-Check: Placeholder response")
+with col2:
+    if st.button("🧠 Logic Check"):
+        st.write("AI Logic Check: Placeholder response")
+with col3:
+    if st.button("📖 Argument Structure"):
+        st.write("AI Argument Structure Analysis: Placeholder response")
+
+# AI Flagging System (Passive Mode)
+if os.getenv("ENABLE_FLAGGING") == "true":  # Example flag control
+    st.warning("⚠️ AI has flagged a statement as potentially problematic.")
     if st.button("Explain Flag"):
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": f"Explain why this statement might be misleading or logically flawed: {user_input}"}]
-        )
-        flag_explanation = response["choices"][0]["message"]["content"]
-        st.session_state.messages.append({"role": "assistant", "content": flag_explanation})
-        st.chat_message("assistant").write(flag_explanation)
+        st.write("AI Explanation: Placeholder reasoning for flagged message.")
