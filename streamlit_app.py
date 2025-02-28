@@ -22,13 +22,12 @@ openai.api_key = OPENAI_API_KEY
 
 def ask_openai(prompt):
     """Sends a query to OpenAI and returns the response."""
-    response = openai.ChatCompletion.create(
-    model="gpt-4-turbo",  # Use the latest available model
-    messages=[
-        {"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
-        {"role": "user", "content": prompt}
+    response = openai.chat.completions.create(
+        model="gpt-4-turbo",
+        messages=[{"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
+                  {"role": "user", "content": prompt}]
     )
-    return response["choices"][0]["message"]["content"]
+    return response.choices[0].message.content
 
 # Fetch messages in real-time
 def get_messages():
