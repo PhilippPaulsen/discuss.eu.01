@@ -24,7 +24,7 @@ def ask_openai(prompt):
     """Sends a query to OpenAI and returns the response."""
     response = openai.chat.completions.create(
         model="gpt-4-turbo",
-        messages=[{"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
+        messages=[{"role": "system", "content": "You are an academic AI participant, engaging in logical, fact-based discussions."},
                   {"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content
@@ -39,6 +39,16 @@ st.write("Engage in live, AI-assisted discussions with real-time message updates
 
 # Fetch messages before looping
 messages = get_messages()
+
+# AI Conversation Partner - Responds to each user input
+if messages and messages[-1]["user"] == "You":
+    ai_response = ask_openai(messages[-1]["message"])
+    chat_ref.add({
+        "user": "AI", 
+        "message": ai_response, 
+        "timestamp": datetime.utcnow()
+    })
+    messages.append({"user": "AI", "message": ai_response})
 
 # Display messages in speech bubbles with adaptive width and right-aligned user messages
 for msg in messages:
@@ -95,8 +105,9 @@ with col3:
 
 # AI Flagging System (Passive Mode)
 if os.getenv("ENABLE_FLAGGING") == "true":  # Example flag control
-    st.warning("⚠️ AI has flagged a statement as potentially problematic.")
-    if st.button("Explain Flag"):
-        flag_prompt = f"Explain why this statement might be misleading or logically flawed: {user_input}"
-        flag_response = ask_openai(flag_prompt)
-        st.write(f"AI Explanation: {flag_response}")
+    flagged_prompt = f"Analyze this statement for misleading, false, or illogical content: {user_input}. If issues exist, explain why."
+    flagged_response = ask_openai(flagged_prompt)
+    if "misleading" in flagged_response.lower() or "false" in flagged_response.lower() or "illogical" in flagged_response.lower():
+        st.warning("⚠️ AI has flagged this statement as potentially problematic.")
+        if st.button("Explain Flag"):
+            st.write(f"AI Explanation: {flagged_response}")
