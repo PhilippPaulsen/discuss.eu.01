@@ -37,6 +37,9 @@ def get_messages():
 st.title("💬 Discurs.eu")
 st.write("Engage in live, AI-assisted discussions with real-time message updates.")
 
+# Fetch messages before looping
+messages = get_messages()
+
 # Display messages in speech bubbles with alignment
 for msg in messages:
     if msg['user'] == "You":
