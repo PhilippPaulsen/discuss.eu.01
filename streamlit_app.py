@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 # Load Firebase credentials from Streamlit secrets
-firebase_credentials = json.loads(st.secrets["FIREBASE_CREDENTIALS"])
+firebase_credentials = st.secrets["FIREBASE_CREDENTIALS"]
 
 # Initialize Firebase
 if not firebase_admin._apps:
