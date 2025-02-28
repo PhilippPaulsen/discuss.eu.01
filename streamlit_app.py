@@ -36,7 +36,7 @@ if st.button("Send") and user_input:
         "message": user_input,
         "timestamp": datetime.utcnow()
     })
-    st.experimental_rerun()  # Refresh chat instantly
+    st.rerun()  # Refresh chat instantly
 
 # AI Interventions
 col1, col2, col3 = st.columns(3)
