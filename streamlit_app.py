@@ -27,12 +27,6 @@ def ask_openai(prompt):
     messages=[
         {"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
         {"role": "user", "content": prompt}
-    ]
-)
-
-        model="gpt-4",
-        messages=[{"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
-                  {"role": "user", "content": prompt}]
     )
     return response["choices"][0]["message"]["content"]
 
