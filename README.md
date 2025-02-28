@@ -1,56 +1,83 @@
-# Discurs.eu - AI-Assisted Rational Discourse Platform
+# 💬 Discurs.eu
 
-## Overview
-Discurs.eu is an AI-assisted platform designed to enhance rational discourse by providing fact-checking, logic analysis, and argument structure evaluation. The project is currently in its prototyping phase, using **Streamlit** for rapid development and deployment.
+## **Enhancing Rational and Fact-Based Online Discourse Through AI-Assisted Moderation**
 
-## Features
-- **Chat-Based Interface**: Modeled after common messaging apps, providing an intuitive user experience.
-- **Three AI Interventions**:
-  - 🧐 **Fact-Check**: AI verifies statements against available sources.
-  - 🧠 **Logic Check**: AI analyzes logical coherence and identifies fallacies.
-  - 📖 **Argument Structure**: AI evaluates clarity, coherence, and completeness of statements.
-- **AI Flagging System**:
-  - AI passively marks potentially misleading statements.
-  - Users can request an explanation for flagged content.
-- **Discussion Modes**:
-  - **Agora**: Open discussion with minimal AI moderation.
-  - **Forum**: Structured, long-form discussions.
-  - **Lab**: AI-assisted structured debate and synthesis.
+### **Overview**
+Discurs.eu is an **AI-assisted discussion platform** designed to foster **rational, fact-based, and goal-oriented** online conversations. By leveraging AI for **fact-checking, logic verification, and argument structuring**, the platform aims to **counter misinformation** while maintaining user autonomy. Discurs.eu aligns with **EU policies** on responsible AI, digital democracy, and transparent moderation.
 
-## Installation & Setup
-1. Clone this repository:
+## **Features**
+✅ **Real-time chat** with structured discussion layout  
+✅ **User-controlled AI interventions** (fact-checking, logic validation, argument structuring)  
+✅ **Multi-user participation** in a structured discourse  
+✅ **AI flagging for misleading or problematic content**  
+✅ **Download and save conversations**  
+✅ **Start new discussions easily**  
+
+## **Research & Development Goals**
+### **Objective**
+Discurs.eu aims to improve **argument quality and factual accuracy** in online discourse through **AI-assisted moderation**.
+
+### **Methodology**
+- **Prototype:** Built with **Streamlit, OpenAI API, Firebase**
+- **AI Integration:** GPT-based moderation for:
+  - Fact-checking
+  - Logical analysis
+  - Argument structuring
+- **User Testing:** Academic & civic engagement pilots
+
+### **Expected Contributions**
+- **AI-assisted discourse model** improving structured conversations
+- **Better online debate structuring & argumentation quality**
+- **Ethical, transparent AI moderation aligned with EU digital policies**
+
+## **How to Run the Prototype**
+### **Installation**
+1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/discurs-eu.git
    cd discurs-eu
    ```
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install streamlit firebase-admin openai
    ```
-3. Set up your OpenAI API key:
-   ```bash
-   export OPENAI_API_KEY='your-api-key'
+3. Set up API keys for OpenAI and Firebase in `.streamlit/secrets.toml`:
+   ```toml
+   OPENAI_API_KEY = "your_openai_api_key"
+   FIREBASE_CREDENTIALS = "your_firebase_json_credentials"
    ```
-4. Run the Streamlit app:
+4. Run the app locally:
    ```bash
    streamlit run app.py
    ```
 
-## Deployment
-Discurs.eu can be deployed on **Streamlit Community Cloud**:
-1. Push your project to GitHub.
-2. Connect the repo to Streamlit Community Cloud.
-3. Set environment variables (OpenAI API key).
-4. Deploy and test the live app.
+### **Deployment (Streamlit Cloud)**
+1. Push your changes to GitHub.
+2. Set up **Streamlit Cloud** and configure API keys in `secrets`.
+3. Deploy and access via the **Streamlit-hosted link**.
 
-## Roadmap
-- **Phase 1:** Basic chat functionality, AI interventions, and Streamlit deployment.
-- **Phase 2:** Improve UI/UX, optimize AI responses, and introduce real-time updates.
-- **Phase 3:** Expand language support, refine AI moderation logic, and integrate advanced discourse analytics.
+## **Future Roadmap**
+🚀 **Phase 1:** Iteration & AI fine-tuning  
+🌍 **Phase 2:** Expansion for **educational & civic platforms**  
+💡 **Phase 3:** **EU grant application for scaling**  
+📱 **Phase 4:** Full-fledged **web & mobile app** development  
 
-## Contribution
-Contributions are welcome! Please open an issue or submit a pull request to suggest improvements.
+## **How to Contribute**
+We welcome **open-source contributions**! 🚀
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+4. Join discussions in **GitHub Issues** for research contributions
 
-## License
-This project is licensed under the MIT License. See `LICENSE` for more details.
+## **License & Ethical Compliance**
+- This project follows **open-source licensing (MIT/Apache)**
+- Committed to **ethical AI practices** aligned with **EU digital policies**
+
+## **Contact & Community**
+- 📧 Email: [your-email@example.com](mailto:your-email@example.com)
+- 🌍 Website: [discurs.eu](https://discurs.eu)
+- 💬 Join discussions on GitHub!
+
+---
+**Discurs.eu** – AI-assisted moderation for rational, transparent, and fact-based online discourse. Let's make conversations better! 🚀
 
