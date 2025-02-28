@@ -40,22 +40,22 @@ st.write("Engage in live, AI-assisted discussions with real-time message updates
 # Fetch messages before looping
 messages = get_messages()
 
-# Display messages in speech bubbles with adaptive width and indentation
+# Display messages in speech bubbles with adaptive width and right-aligned user messages
 for msg in messages:
     user_name = msg['user']
     message_content = msg['message']
     
     # Determine indentation based on message length (max indent 40px)
     indent_level = min(len(message_content) // 50, 8) * 5  # Increments of 5px, max 40px
-    indent_style = f"margin-left: {indent_level}px;" if user_name == "You" else "margin-right: 0px;"
+    indent_style = f"margin-right: {indent_level}px; text-align: right;" if user_name == "You" else "margin-left: 0px; text-align: left;"
     
     # Define color scheme
     if user_name == "You":
-        bubble_style = "background-color: black; color: white; text-align: left;"
+        bubble_style = "background-color: black; color: white;"
     elif user_name.lower() == "ai":
-        bubble_style = "background-color: darkgray; color: white; text-align: left;"
+        bubble_style = "background-color: darkgray; color: white;"
     else:
-        bubble_style = "background-color: lightgray; color: black; text-align: left;"
+        bubble_style = "background-color: lightgray; color: black;"
     
     st.markdown(f"""
     <div style='padding: 10px; border-radius: 15px; margin: 5px 0; {bubble_style} {indent_style} max-width: 75%; word-wrap: break-word; display: inline-block;'>
