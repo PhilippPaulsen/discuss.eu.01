@@ -37,10 +37,20 @@ def get_messages():
 st.title("💬 Discurs.eu")
 st.write("Engage in live, AI-assisted discussions with real-time message updates.")
 
-# Display messages
-messages = get_messages()
+# Display messages in speech bubbles with alignment
 for msg in messages:
-    st.write(f"{msg['user']}: {msg['message']}")
+    if msg['user'] == "You":
+        st.markdown(f"""
+        <div style='text-align: right; background-color: #DCF8C6; padding: 10px; border-radius: 15px; margin: 5px 0;'>
+            <b>{msg['user']}:</b> {msg['message']}
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div style='text-align: left; background-color: #E5E5EA; padding: 10px; border-radius: 15px; margin: 5px 0;'>
+            <b>{msg['user']}:</b> {msg['message']}
+        </div>
+        """, unsafe_allow_html=True)
 
 # Input for new message
 user_input = st.text_input("Your message:")
