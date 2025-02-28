@@ -2,10 +2,10 @@ import streamlit as st
 import openai
 from datetime import datetime
 import random
+import os
 
 # OpenAI API Key (Replace with your key or load it securely)
-OPENAI_API_KEY = "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"
-openai.api_key = OPENAI_API_KEY
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize session state for chat history if not present
 if "messages" not in st.session_state:
