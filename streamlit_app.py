@@ -20,7 +20,7 @@ def get_messages():
     docs = chat_ref.order_by("timestamp").stream()
     return [{"user": doc.to_dict()["user"], "message": doc.to_dict()["message"]} for doc in docs]
 
-st.title("💬 Discurs.eu - Agora Mode (Real-Time Chat)")
+st.title("💬 Discurs.eu")
 st.write("Engage in live, AI-assisted discussions with real-time message updates.")
 
 # Display messages
