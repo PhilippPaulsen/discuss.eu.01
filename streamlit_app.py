@@ -23,6 +23,13 @@ openai.api_key = OPENAI_API_KEY
 def ask_openai(prompt):
     """Sends a query to OpenAI and returns the response."""
     response = openai.ChatCompletion.create(
+    model="gpt-4-turbo",  # Use the latest available model
+    messages=[
+        {"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
+        {"role": "user", "content": prompt}
+    ]
+)
+
         model="gpt-4",
         messages=[{"role": "system", "content": "You are an academic AI moderator, providing fact-checking, logic analysis, and argument structuring."},
                   {"role": "user", "content": prompt}]
