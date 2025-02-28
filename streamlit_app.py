@@ -47,7 +47,7 @@ for msg in messages:
     
     # Determine indentation based on message length (max indent 40px)
     indent_level = min(len(message_content) // 50, 8) * 5  # Increments of 5px, max 40px
-    indent_style = f"margin-right: {indent_level}px; text-align: right;" if user_name == "You" else "margin-left: 0px; text-align: left;"
+    indent_style = f"margin-left: auto; margin-right: {indent_level}px; text-align: left;" if user_name == "You" else "margin-left: 0px; margin-right: auto; text-align: left;"
     
     # Define color scheme
     if user_name == "You":
@@ -58,7 +58,7 @@ for msg in messages:
         bubble_style = "background-color: lightgray; color: black;"
     
     st.markdown(f"""
-    <div style='padding: 10px; border-radius: 15px; margin: 5px 0; {bubble_style} {indent_style} max-width: 75%; word-wrap: break-word; display: inline-block;'>
+    <div style='padding: 10px; border-radius: 15px; margin: 5px 0; {bubble_style} {indent_style} max-width: 75%; word-wrap: break-word; display: block; width: fit-content;'>
         <b>{user_name}:</b> {message_content}
     </div>
     """, unsafe_allow_html=True)
