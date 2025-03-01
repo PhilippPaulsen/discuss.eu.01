@@ -21,3 +21,18 @@ Discurs.eu is built on ethical AI principles, fostering **transparent, construct
 
 🔹 **Use the sidebar to navigate between Agora, Forum, Lab, and other sections.**
 """)
+
+st.markdown("""
+    <style>
+        @font-face {
+            font-family: 'Suisse';
+            src: url('/static/assets/SuisseIntl-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        html, body, [class*="st-"] {
+            font-family: 'Suisse', sans-serif;
+        }
+    </style>
+""", unsafe_allow_html=True)
