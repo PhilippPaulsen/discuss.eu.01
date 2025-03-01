@@ -1,4 +1,7 @@
 import streamlit as st
+from utils import apply_custom_styles  # Import global styles
+
+apply_custom_styles()  # Apply font styles
 
 st.title("🟢 Agora - Open Discussions")
 st.write("Welcome to the **Agora**! Engage in open-ended discussions with minimal AI moderation.")
