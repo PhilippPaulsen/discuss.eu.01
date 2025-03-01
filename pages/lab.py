@@ -1,8 +1,6 @@
 import streamlit as st
 from utils import apply_custom_styles  # Import the styling function
 
-st.set_page_config(page_title="Discurs.eu", page_icon="💬", layout="wide")
-
 # Custom Title
 st.markdown("""
     <h1 style='text-align: left; font-family: "Suisse", sans-serif; font-weight: bold;'>
