@@ -1,6 +1,15 @@
 import streamlit as st
+from utils import apply_custom_styles  # Import the styling function
 
-st.title("🔵 Forum - Structured Debates")
+st.set_page_config(page_title="Discurs.eu", page_icon="💬", layout="wide")
+
+# Custom Title
+st.markdown("""
+    <h1 style='text-align: left; font-family: "Suisse", sans-serif; font-weight: bold;'>
+        🔵 Forum - Structured Debates
+    </h1>
+""", unsafe_allow_html=True)
+
 st.write("Welcome to the **Forum**! Engage in structured discussions with ranking and voting features.")
 
 # Discussion topic
