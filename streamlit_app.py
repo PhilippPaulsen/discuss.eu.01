@@ -45,7 +45,7 @@ st.write("""
 Discurs.eu is an AI-assisted discussion platform designed to **enhance rational, structured, and goal-oriented discourse.** 
 Our platform enables users to engage in open discussions (**Agora**), structured debates (**Forum**), and research-oriented problem-solving (**Lab**) with AI-driven **fact-checking, logic validation, and argument structuring**.
 
-### **How It Works**
+**How It Works**
 - **Agora:** Free-form discussions with minimal AI intervention.
 - **Forum:** Structured debates with argument categorization and ranking.
 - **Lab:** Research-driven conversations with peer review and AI guidance.
