@@ -8,12 +8,12 @@ page = st.sidebar.radio("Go to", ["Agora", "Forum", "Lab", "Contact", "Sign In"]
 
 # Multi-page Navigation
 if page == "Agora":
-    import pages.01_agora
+    import pages.a_agora
 elif page == "Forum":
-    import pages.02_forum
+    import pages.b_forum
 elif page == "Lab":
-    import pages.03_lab
+    import pages.c_lab
 elif page == "Contact":
-    import pages.04_contact
+    import pages.d_contact
 elif page == "Sign In":
-    import pages.05_sign_in
+    import pages.e_sign_in
