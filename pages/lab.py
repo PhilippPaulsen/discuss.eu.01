@@ -1,6 +1,15 @@
 import streamlit as st
+from utils import apply_custom_styles  # Import the styling function
 
-st.title("🔬 Lab - Research & Problem Solving")
+st.set_page_config(page_title="Discurs.eu", page_icon="💬", layout="wide")
+
+# Custom Title
+st.markdown("""
+    <h1 style='text-align: left; font-family: "Suisse", sans-serif; font-weight: bold;'>
+        🔬 Lab - Research & Problem Solving
+    </h1>
+""", unsafe_allow_html=True)
+
 st.write("Welcome to the **Lab**! Discussions here follow a structured research methodology.")
 
 # Problem-solving workflow
