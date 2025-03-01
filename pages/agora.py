@@ -3,9 +3,9 @@ from utils import apply_custom_styles  # Import global styles
 
 apply_custom_styles()  # Apply font styles
 
-# Custom App Title
+# Custom Title
 st.markdown("""
-    <h1 style='text-align: center; font-family: "Suisse", sans-serif; font-weight: bold;'>
+    <h1 style='text-align: left; font-family: "Suisse", sans-serif; font-weight: bold;'>
         🟢 Agora - Open Discussions
     </h1>
 """, unsafe_allow_html=True)
