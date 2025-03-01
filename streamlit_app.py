@@ -34,7 +34,7 @@ st.markdown("""
 # Custom App Title (instead of "Streamlit app")
 st.markdown("""
     <h1 style='text-align: left; font-family: "Suisse", sans-serif; font-weight: bold;'>
-        💬 Discurs.eu
+        Discurs.eu 💬
     </h1>
 """, unsafe_allow_html=True)
 
