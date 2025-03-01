@@ -14,8 +14,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.write("""
-**Welcome to Discurs.eu!**
-
 Discurs.eu is an AI-assisted discussion platform designed to **enhance rational, structured, and goal-oriented discourse.** 
 Our platform enables users to engage in open discussions (**Agora**), structured debates (**Forum**), and research-oriented problem-solving (**Lab**) with AI-driven **fact-checking, logic validation, and argument structuring**.
 
