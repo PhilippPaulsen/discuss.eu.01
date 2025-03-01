@@ -9,18 +9,18 @@ def apply_custom_styles():
                 font-weight: normal;
                 font-style: normal;
             }
-            
+
             @font-face {
                 font-family: 'Suisse';
                 src: url('/static/assets/SuisseIntl-Bold.woff2') format('woff2');
                 font-weight: bold;
                 font-style: normal;
             }
-            
+
             html, body, [class*="st-"], h1, h2, h3, h4, h5, h6, .stMarkdown, .stTextArea label, .stSubheader {
                 font-family: 'Suisse', sans-serif !important;
             }
-            
+
             h1 {
                 font-weight: 700;
             }
@@ -32,4 +32,4 @@ def apply_custom_styles():
                 font-weight: 500;
             }
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
