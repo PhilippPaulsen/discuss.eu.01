@@ -49,3 +49,9 @@ Discurs.eu is built on ethical AI principles, fostering **transparent, construct
 
 🔹 **Use the sidebar to navigate between Agora, Forum, Lab, and other sections.**
 """)
+# Custom App Title (instead of "Streamlit app")
+st.markdown("""
+    <h1 style='text-align: center; font-family: "Suisse", sans-serif; font-weight: bold;'>
+        💬 Discurs.eu
+    </h1>
+""", unsafe_allow_html=True)
